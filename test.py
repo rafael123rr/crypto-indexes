@@ -1,5 +1,6 @@
 import requests, json
 from pprint import pprint
+from datetime import datetime
 
 
 def get_specific(coin_id):
@@ -29,4 +30,14 @@ def get_all():
         total += get(coin, data)
     print(total/(10**9))
 
-get_all()
+def run():
+    called = False
+    while(True):
+        now = datetime.now()
+        if now.minute % 5 == 0 and not called:
+            get_all()
+            called = True
+        if now.minute % 5 == 1:
+            called = False
+
+run()
