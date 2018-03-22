@@ -14,52 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-import webapp2
-import json
-import urllib2
-from pprint import pprint
-from datetime import datetime
 
-
-# def get_specific(coin_id):
-#     endpoint = 'https://api.coinmarketcap.com/v1/ticker/'+coin_id+'/'
-#     try:
-#         r = requests.get(endpoint)
-#         data = r.json()
-#         return data[0]['market_cap_usd']
-#     except:
-#         print('try again')
-
-
-def get(symbol, data):
-    for coin in data:
-        if coin['symbol'] == symbol:
-            return float(coin['market_cap_usd'])
-
-
-def get_all():
-    endpoint = 'https://api.coinmarketcap.com/v1/ticker/?limit=30'
-
-    data = urllib2.urlopen(endpoint)
-    content = data.read()
-    parsed = json.loads(content)
-    # r = requests.get(endpoint)
-    # data = r.json()
-    total = 0
-    coins = ['BTC', 'ETH', 'LTC', 'XRP', 'BCH', 'ADA', 'XLM', 'NEO', 'EOS', 'MIOTA', 'XMR', 'DASH', 'XEM']
-    for coin in coins:
-        total += get(coin, parsed)
-    return (total/(10**9))
-
-def update():
-    called = False
-    while(True):
-        now = datetime.now()
-        if now.minute % 5 == 0 and not called:
-            self.response.write(get_all())
-            called = True
-        if now.minute % 5 == 1:
-            called = False
 
 
 class MainHandler(webapp2.RequestHandler):
