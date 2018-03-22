@@ -47,7 +47,7 @@ def get_all():
     # r = requests.get(endpoint)
     # data = r.json()
     total = 0
-    coins = ['BTC', 'ETH', 'LTC', 'XRP', 'BCH', 'ADA', 'XLM', 'NEO', 'EOS', 'MIOTA', 'XMR', 'DASH', 'XEM']
+    coins = ['BTC', 'ETH', 'LTC', 'XRP', 'BCH', 'ADA', 'XLM', 'NEO', 'EOS', 'MIOTA', 'XMR', 'DASH', 'XEM', 'ETC']
     for coin in coins:
         total += get(coin, parsed)
     return (total/(10**9))
